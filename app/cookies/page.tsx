@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import { CookieSettingsButton } from "@/components/cookie-consent";
+import { PageHero } from "@/components/ui";
+
+export const metadata: Metadata = { title: "Cookie Choices", description: "Understand and change Sunshine Cleaning website cookie and analytics preferences.", alternates: { canonical: "/cookies/" } };
+
+export default function CookiesPage() {
+  return <main id="main-content"><PageHero eyebrow="Cookie choices" title="Optional analytics stays off until you say yes." intro="Necessary preference storage remembers your choice. Google Analytics is optional and does not load before consent." /><article className="legal-content page-shell section-space"><h2>Necessary preference storage</h2><p>The website stores a small versioned preference in your browser&apos;s local storage. It records whether you accepted or rejected optional analytics and when the choice was saved. This prevents the banner appearing on every page.</p><h2>Optional analytics</h2><p>If you accept analytics and a GA4 measurement ID has been configured, the website loads Google Analytics. Google may then set cookies beginning with <code>_ga</code> to distinguish browser sessions and prepare aggregate usage reports.</p><h2>If you reject</h2><p>No Google Analytics script is requested. Rejecting analytics does not make the quote form, telephone, email or WhatsApp links less accessible.</p><h2>Change or withdraw your choice</h2><p>Use the button below to reopen the consent controls. Choosing “Reject analytics” also attempts to remove existing Google Analytics cookies and related local keys for this website.</p><CookieSettingsButton /><h2>Launch approval</h2><p>This wording and the final list of live cookies must be checked again after the production analytics configuration is supplied.</p></article></main>;
+}

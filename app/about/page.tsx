@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import { ContactBand, PageHero } from "@/components/ui";
+import { ResponsiveImage } from "@/components/responsive-image";
+
+export const metadata: Metadata = { title: "About Sunshine Cleaning York", description: "Meet the approach behind Sunshine Cleaning: clear scopes, thoughtful property care and straightforward communication across York.", alternates: { canonical: "/about/" } };
+
+export default function AboutPage() {
+  return <main id="main-content"><PageHero eyebrow="About Sunshine" title="Cleaning built around clarity, care and the real property." intro="Sunshine Cleaning is creating a straightforward local service for York homes, properties and workplaces—without claims we cannot evidence or packages that hide the useful detail." /><section className="about-story page-shell section-space"><ResponsiveImage name="holiday-let" alt="Cleaner preparing a bed in a York townhouse" sizes="(max-width: 800px) 100vw, 46vw" /><div data-reveal><p className="eyebrow">Our working principles</p><h2>Warm service. Specific expectations.</h2><p>Good cleaning starts before anyone arrives: with an honest description of the space, a practical scope and a shared understanding of priorities.</p><ol><li><span>01</span><div><h3>Listen first</h3><p>The property and occasion shape the plan.</p></div></li><li><span>02</span><div><h3>Say what is included</h3><p>Clear scopes are more useful than broad promises.</p></div></li><li><span>03</span><div><h3>Keep proof truthful</h3><p>Reviews, insurance and statistics will only appear when approved evidence is available.</p></div></li></ol></div></section><section className="values-band"><div className="page-shell"><p>York-focused</p><p>British English</p><p>No invented claims</p><p>Easy contact</p></div></section><ContactBand /></main>;
+}

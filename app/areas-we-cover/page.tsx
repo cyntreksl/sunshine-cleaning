@@ -1,0 +1,9 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ContactBand, PageHero } from "@/components/ui";
+
+export const metadata: Metadata = { title: "Areas We Cover | Cleaning Across York City", description: "Sunshine Cleaning serves homes, rental properties, holiday lets, offices and selected commercial spaces across York city.", alternates: { canonical: "/areas-we-cover/" } };
+
+export default function AreasPage() {
+  return <main id="main-content"><PageHero eyebrow="York city coverage" title="Local cleaning, with a deliberately clear service area." intro="Sunshine Cleaning currently focuses on York city. Share your postcode and property details so we can confirm travel and availability before you plan around us." /><section className="coverage-feature page-shell section-space"><div className="coverage-art" aria-hidden="true"><span>YORK</span><svg viewBox="0 0 500 380"><path d="M51 101c39-74 113-42 171-70 74-36 133 25 190 71 62 50 21 112 42 167 20 53-58 87-125 77-67-10-96 25-157 5-53-18-70-74-118-106-48-32-33-93-3-144Z"/><path d="M84 201c88-21 193-2 325-48M225 45c-16 92 24 186 11 290"/></svg></div><div data-reveal><p className="eyebrow">A useful local promise</p><h2>York first, not hundreds of copied area pages.</h2><p>Search visibility should come from relevant service information, useful guides and consistent business details—not duplicated neighbourhood wording. Our website therefore describes one genuine coverage area.</p><ul className="benefit-list"><li><span>✓</span>York city homes</li><li><span>✓</span>York rental and holiday-let properties</li><li><span>✓</span>York offices and selected commercial spaces</li></ul><Link className="button" href="/contact/">Check your postcode</Link></div></section><ContactBand title="Send your York postcode and cleaning brief." /></main>;
+}
