@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sunshine Cleaning
 
-## Getting Started
+Next.js website for Sunshine Cleaning in York.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Enquiry email with Resend
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The contact form posts to the Next.js Route Handler at `app/api/enquiry/route.ts`. It validates the submission and sends the enquiry through Resend.
 
-## Learn More
+Copy `.env.example` to `.env.local` and configure:
 
-To learn more about Next.js, take a look at the following resources:
+```dotenv
+RESEND_API_KEY=re_xxxxxxxxx
+RESEND_FROM_EMAIL=website@sunshinecleaning.uk
+RESEND_TO_EMAIL=info@sunshinecleaning.uk
+SUNSHINE_FORM_TEST_MODE=0
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Before production deployment:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Add and verify `sunshinecleaning.uk` (or the exact sending subdomain) in Resend.
+2. Create a sending API key and set `RESEND_API_KEY` on the deployment platform.
+3. Make sure `RESEND_FROM_EMAIL` uses the verified domain or subdomain.
+4. Keep `SUNSHINE_FORM_TEST_MODE=0` in production.
 
-## Deploy on Vercel
+`SUNSHINE_FORM_TEST_MODE=1` bypasses external delivery and is only for automated tests.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Build and deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm run start
+```
+
+The project requires a Node.js-capable Next.js deployment. It is no longer a static export and does not use PHP. Configure the Resend values as server-side environment variables in Vercel or your Node hosting provider.

@@ -30,7 +30,7 @@ export function QuoteForm() {
 
   const errorFor = (name: string) => state.fieldErrors?.[name];
   return (
-    <form className="quote-form" action="/api/enquiry.php" method="post" onSubmit={submit} onFocus={() => { if (startedAtRef.current && !startedAtRef.current.value) startedAtRef.current.value = String(Date.now()); }} noValidate={false}>
+    <form className="quote-form" action="/api/enquiry" method="post" onSubmit={submit} onFocus={() => { if (startedAtRef.current && !startedAtRef.current.value) startedAtRef.current.value = String(Date.now()); }} noValidate={false}>
       <input type="hidden" name="redirect" value="/thank-you/" />
       <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue="" />
       <div className="honeypot" aria-hidden="true"><label htmlFor="website">Website</label><input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" /></div>

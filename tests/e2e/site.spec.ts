@@ -15,8 +15,8 @@ test("mobile menu exposes the primary routes", async ({ page }) => {
   await page.goto("/");
   const menu = page.locator(".menu-toggle");
   await menu.click();
-  await expect(menu).toHaveAttribute("aria-expanded", "true");
-  await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "Contact" })).toBeVisible();
+  await expect(page.locator("details.mobile-nav")).toHaveAttribute("open", "");
+  await expect(page.getByRole("navigation", { name: "Mobile navigation" }).getByRole("link", { name: "Contact" })).toBeVisible();
 });
 
 test("quote form validates and submits with accessible success", async ({ page }) => {
@@ -39,7 +39,7 @@ test("quote form validates and submits with accessible success", async ({ page }
 });
 
 test("quote form presents endpoint errors", async ({ page }) => {
-  await page.route("**/api/enquiry.php", (route) => route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ ok: false, message: "Temporary test error." }) }));
+  await page.route("**/api/enquiry", (route) => route.fulfill({ status: 500, contentType: "application/json", body: JSON.stringify({ ok: false, message: "Temporary test error." }) }));
   await page.goto("/contact/");
   await page.getByLabel("Your name").fill("Jamie Taylor");
   await page.getByLabel("Email address").fill("jamie@example.com");

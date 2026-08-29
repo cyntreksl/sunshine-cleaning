@@ -7,7 +7,7 @@ export default defineConfig({
   reporter: "line",
   use: { baseURL: "http://127.0.0.1:4173", trace: "retain-on-failure" },
   webServer: {
-    command: "NEXT_PUBLIC_GA_ID=G-TEST123 npm run build && SUNSHINE_FORM_TEST_MODE=1 php -S 127.0.0.1:4173 -t out",
+    command: "NEXT_PUBLIC_GA_ID=G-TEST123 npm run build && SUNSHINE_FORM_TEST_MODE=1 npm run start -- --hostname 127.0.0.1 --port 4173",
     url: "http://127.0.0.1:4173",
     reuseExistingServer: true,
     timeout: 180_000,

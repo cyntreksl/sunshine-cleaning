@@ -10,7 +10,6 @@
     "typecheck": "tsc --noEmit",
     "start": "next start",
     "lint": "eslint",
-    "audit:static": "node scripts/audit-static.mjs",
     "test:e2e": "playwright test"
   },
   "dependencies": {
@@ -19,7 +18,8 @@
     "@next/mdx": "^16.3.3",
     "next": "16.3.3",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "resend": "^6.25.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
