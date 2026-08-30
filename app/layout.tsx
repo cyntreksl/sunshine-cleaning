@@ -32,7 +32,6 @@ export const metadata: Metadata = {
     description: "Professional cleaning for York homes and businesses.",
     images: ["/images/social-card.jpg"],
   },
-  icons: { icon: "/icon.svg", shortcut: "/icon.svg" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

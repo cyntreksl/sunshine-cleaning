@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "icons:build": "node scripts/build-icons.mjs",
     "images:build": "node scripts/build-images.mjs",
-    "prebuild": "npm run images:build",
+    "prebuild": "npm run icons:build && npm run images:build",
     "build": "next build",
     "typecheck": "tsc --noEmit",
     "start": "next start",
