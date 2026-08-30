@@ -4,32 +4,32 @@ import { RevealController } from "@/components/reveal-controller";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { JsonLd } from "@/components/json-ld";
-import { siteConfig } from "@/content/site";
+import { organizationNode, websiteNode } from "@/lib/structured-data";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sunshinecleaning.uk"),
   title: {
-    default: "Sunshine Cleaning | Professional Cleaning in York",
+    default: "Cleaning Services in York | Sunshine Cleaning",
     template: "%s | Sunshine Cleaning York",
   },
   description:
-    "Thoughtful domestic and commercial cleaning for homes, workplaces and properties across York.",
+    "Professional domestic and commercial cleaning services across York and the wider YO postcode area. Call, WhatsApp, email or request a free quote.",
   applicationName: "Sunshine Cleaning",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_GB",
     siteName: "Sunshine Cleaning",
-    title: "Professional cleaning for York homes and businesses",
-    description: "Domestic, property and workplace cleaning across York city.",
+    title: "Cleaning Services in York | Sunshine Cleaning",
+    description: "Professional domestic, property and workplace cleaning across York and the wider YO postcode area.",
     url: "/",
     images: [{ url: "/images/social-card.jpg", width: 1200, height: 630, alt: "Sunshine Cleaning — Professional cleaning in York" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sunshine Cleaning in York",
-    description: "Professional cleaning for York homes and businesses.",
+    title: "Cleaning Services in York | Sunshine Cleaning",
+    description: "Professional cleaning for York homes, properties and businesses across the wider YO postcode area.",
     images: ["/images/social-card.jpg"],
   },
 };
@@ -44,16 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SiteFooter />
         <CookieConsent />
         <RevealController />
-        <JsonLd data={{
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: siteConfig.brand,
-          url: siteConfig.canonicalUrl,
-          email: siteConfig.email,
-          telephone: "+447426292238",
-          areaServed: { "@type": "City", name: "York" },
-          logo: `${siteConfig.canonicalUrl}/icon.svg`,
-        }} />
+        <JsonLd data={[organizationNode, websiteNode]} />
       </body>
     </html>
   );

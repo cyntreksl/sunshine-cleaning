@@ -2,6 +2,7 @@
 
 import { FormEvent, useRef, useState } from "react";
 import { services } from "@/content/services";
+import { siteConfig } from "@/content/site";
 
 type FormState = { kind: "idle" | "sending" | "success" | "error"; message?: string; fieldErrors?: Record<string, string> };
 
@@ -38,7 +39,7 @@ export function QuoteForm() {
         <Field label="Your name" name="name" error={errorFor("name")}><input id="name" name="name" type="text" autoComplete="name" maxLength={80} required /></Field>
         <Field label="Email address" name="email" error={errorFor("email")}><input id="email" name="email" type="email" autoComplete="email" maxLength={160} required /></Field>
         <Field label="Telephone" name="phone" error={errorFor("phone")}><input id="phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" maxLength={30} required /></Field>
-        <Field label="York postcode" name="postcode" error={errorFor("postcode")}><input id="postcode" name="postcode" type="text" autoComplete="postal-code" maxLength={12} required /></Field>
+        <Field label="YO postcode" name="postcode" error={errorFor("postcode")}><input id="postcode" name="postcode" type="text" autoComplete="postal-code" maxLength={12} required /></Field>
         <Field label="Service" name="service" error={errorFor("service")}><select id="service" name="service" defaultValue="" required><option value="" disabled>Select a service</option>{services.map((service) => <option value={service.slug} key={service.slug}>{service.shortName}</option>)}</select></Field>
         <Field label="Property type" name="propertyType" error={errorFor("propertyType")}><select id="propertyType" name="propertyType" defaultValue="" required><option value="" disabled>Select property type</option><option>House</option><option>Flat</option><option>Holiday let</option><option>Office</option><option>Commercial space</option><option>Other</option></select></Field>
         <Field label="Frequency" name="frequency" error={errorFor("frequency")}><select id="frequency" name="frequency" defaultValue="" required><option value="" disabled>Select frequency</option><option>One-off</option><option>Weekly</option><option>Fortnightly</option><option>Other regular schedule</option><option>Not sure yet</option></select></Field>
@@ -46,7 +47,7 @@ export function QuoteForm() {
         <Field label="Anything we should know?" name="message" error={errorFor("message")} wide><textarea id="message" name="message" rows={6} maxLength={2000} placeholder="Property size, priority rooms, current condition, access or timing details…" required /></Field>
       </div>
       <label className="privacy-check"><input name="privacyAccepted" type="checkbox" value="yes" required /><span>I have read the <a href="/privacy/">privacy notice</a> and agree to Sunshine Cleaning using these details to respond to my enquiry.</span></label>
-      <div className="form-submit"><button className="button" type="submit" disabled={state.kind === "sending"}>{state.kind === "sending" ? "Sending…" : "Send my enquiry"}</button><p>Prefer to talk? Call <a href="tel:+447426292238">+44 7426 292238</a>.</p></div>
+      <div className="form-submit"><button className="button" type="submit" disabled={state.kind === "sending"}>{state.kind === "sending" ? "Sending…" : "Send my enquiry"}</button><p>Prefer to talk? Call <a href={siteConfig.phoneHref}>{siteConfig.phoneDisplay}</a>.</p></div>
       {state.kind !== "idle" && state.kind !== "sending" ? <div className={`form-status ${state.kind}`} role={state.kind === "error" ? "alert" : "status"} tabIndex={-1}>{state.message}</div> : null}
     </form>
   );

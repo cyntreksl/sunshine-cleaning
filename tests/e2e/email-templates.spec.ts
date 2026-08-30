@@ -4,7 +4,7 @@ import { buildEnquiryEmailMessages, renderCustomerEnquiryEmail, renderInternalEn
 const enquiry = {
   name: "Jamie Taylor",
   email: "jamie@example.com",
-  phone: "07426 292238",
+  phone: "07459935170",
   postcode: "YO1 7AB",
   service: "Deep cleaning",
   propertyType: "House",
@@ -33,20 +33,20 @@ test("customer confirmation contains contact options and submitted details", () 
 
   expect(email.subject).toBe("We’ve received your Sunshine Cleaning enquiry");
   expect(email.html).toContain("Thank you, Jamie Taylor.");
-  expect(email.html).toContain("mailto:info@sunshinecleaning.uk");
-  expect(email.html).toContain("tel:+447426292238");
+  expect(email.html).toContain("mailto:sunshinecleaningyork@gmail.com");
+  expect(email.html).toContain("tel:07459935170");
   expect(email.html).toContain("Deep cleaning");
   expect(email.text).toContain("Your enquiry details");
   expect(email.text).toContain("https://sunshinecleaning.uk");
 });
 
 test("email messages keep recipients separate and route replies correctly", () => {
-  const messages = buildEnquiryEmailMessages(enquiry, "website@sunshinecleaning.uk", "info@sunshinecleaning.uk");
+  const messages = buildEnquiryEmailMessages(enquiry, "website@sunshinecleaning.uk", "sunshinecleaningyork@gmail.com");
 
-  expect(messages.internal.to).toEqual(["info@sunshinecleaning.uk"]);
+  expect(messages.internal.to).toEqual(["sunshinecleaningyork@gmail.com"]);
   expect(messages.internal.replyTo).toBe("jamie@example.com");
   expect(messages.customer.to).toEqual(["jamie@example.com"]);
-  expect(messages.customer.replyTo).toBe("info@sunshinecleaning.uk");
+  expect(messages.customer.replyTo).toBe("sunshinecleaningyork@gmail.com");
   expect(messages.internal.to).not.toEqual(messages.customer.to);
 });
 

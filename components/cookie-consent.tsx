@@ -2,11 +2,10 @@ const gaId = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 const controller = `(() => {
   const key = 'sunshine-consent-v1';
-  const banner = document.querySelector('[data-cookie-banner]');
   const gaId = ${JSON.stringify(gaId)};
   const read = () => { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; } };
-  const hide = () => { if (banner) banner.hidden = true; };
-  const show = () => { if (banner) banner.hidden = false; };
+  const hide = () => { document.documentElement.dataset.sunshineConsent = 'saved'; };
+  const show = () => { document.documentElement.dataset.sunshineConsent = 'pending'; };
   const removeAnalytics = () => {
     if (gaId) window['ga-disable-' + gaId] = true;
     Object.keys(localStorage).filter(name => name.startsWith('_ga')).forEach(name => localStorage.removeItem(name));

@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Sunshine Cleaning",
     short_name: "Sunshine",
-    description: "Professional cleaning for York homes and businesses",
+    description: "Professional cleaning services across York and the wider YO postcode area",
     start_url: "/",
     display: "standalone",
     background_color: "#f5f0e6",

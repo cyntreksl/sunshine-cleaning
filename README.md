@@ -21,7 +21,7 @@ Copy `.env.example` to `.env.local` and configure:
 ```dotenv
 RESEND_API_KEY=re_xxxxxxxxx
 RESEND_FROM_EMAIL=website@sunshinecleaning.uk
-RESEND_TO_EMAIL=info@sunshinecleaning.uk
+RESEND_TO_EMAIL=sunshinecleaningyork@gmail.com
 SUNSHINE_FORM_TEST_MODE=0
 ```
 

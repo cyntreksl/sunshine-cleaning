@@ -106,7 +106,7 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
   const fromEmail = process.env.RESEND_FROM_EMAIL?.trim() || "website@sunshinecleaning.uk";
-  const toEmail = process.env.RESEND_TO_EMAIL?.trim() || "info@sunshinecleaning.uk";
+  const toEmail = process.env.RESEND_TO_EMAIL?.trim() || "sunshinecleaningyork@gmail.com";
   if (!apiKey) {
     console.error("Enquiry delivery is unavailable: RESEND_API_KEY is not configured.");
     return response(500, false, "We could not send your enquiry just now. Please call, WhatsApp or email us instead.");

@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="footer-main page-shell">
         <div>
           <Brand />
-          <p>Thoughtful domestic, property and workplace cleaning across York city.</p>
+          <p>Professional domestic, property and workplace cleaning across York and the wider YO postcode area.</p>
         </div>
         <div>
           <h2>Explore</h2>

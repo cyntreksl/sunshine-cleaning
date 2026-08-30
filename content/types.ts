@@ -5,14 +5,18 @@ export type SiteConfig = {
   email: string;
   phoneDisplay: string;
   phoneHref: string;
+  phoneInternational: string;
   whatsappHref: string;
   serviceArea: string;
+  serviceAreas: { name: string; postcodes: string[] }[];
 };
 
 export type ServiceRecord = {
   slug: string;
   name: string;
   shortName: string;
+  metaDescription: string;
+  updated: string;
   eyebrow: string;
   summary: string;
   description: string;

@@ -1,15 +1,24 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/content/services";
 import { guides } from "@/content/guides";
+import { siteConfig } from "@/content/site";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://sunshinecleaning.uk";
-  const staticRoutes = ["", "/services", "/areas-we-cover", "/about", "/guides", "/contact", "/privacy", "/cookies"];
+  const staticRoutes = [
+    { path: "", priority: 1, updated: "2026-08-31" },
+    { path: "/services", priority: 0.9, updated: "2026-08-31" },
+    { path: "/areas-we-cover", priority: 0.8, updated: "2026-08-31" },
+    { path: "/about", priority: 0.7, updated: "2026-08-31" },
+    { path: "/guides", priority: 0.7, updated: "2026-08-31" },
+    { path: "/contact", priority: 0.8, updated: "2026-08-31" },
+    { path: "/privacy", priority: 0.4, updated: "2026-08-30" },
+    { path: "/cookies", priority: 0.4, updated: "2026-08-30" },
+  ];
   return [
-    ...staticRoutes.map((route) => ({ url: `${base}${route}/`.replace(`${base}//`, `${base}/`), changeFrequency: route === "" ? "weekly" as const : "monthly" as const, priority: route === "" ? 1 : route === "/services" ? 0.9 : 0.6 })),
-    ...services.map((service) => ({ url: `${base}/services/${service.slug}/`, changeFrequency: "monthly" as const, priority: 0.8 })),
-    ...guides.map((guide) => ({ url: `${base}/guides/${guide.slug}/`, lastModified: guide.updated, changeFrequency: "monthly" as const, priority: 0.7 })),
+    ...staticRoutes.map((route) => ({ url: `${siteConfig.canonicalUrl}${route.path}/`.replace(`${siteConfig.canonicalUrl}//`, `${siteConfig.canonicalUrl}/`), lastModified: route.updated, changeFrequency: route.path === "" ? "weekly" as const : "monthly" as const, priority: route.priority })),
+    ...services.map((service) => ({ url: `${siteConfig.canonicalUrl}/services/${service.slug}/`, lastModified: service.updated, changeFrequency: "monthly" as const, priority: 0.8 })),
+    ...guides.map((guide) => ({ url: `${siteConfig.canonicalUrl}/guides/${guide.slug}/`, lastModified: guide.updated, changeFrequency: "monthly" as const, priority: 0.7 })),
   ];
 }

@@ -79,6 +79,15 @@ h1, h2 { margin: 0; font-family: var(--font-serif); font-weight: 520; letter-spa
 .hero-sweep { position: absolute; right: -4%; bottom: -3%; width: 67%; fill: none; stroke: var(--sun); stroke-linecap: round; stroke-width: 3; }
 .hero-sweep path:last-child { stroke: var(--ink); stroke-width: 1.3; }
 
+.fact-band { padding-block: clamp(3.5rem, 7vw, 5.5rem); border-block: 1px solid var(--line); background: var(--paper); }
+.fact-band > div, .entity-links { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(3rem, 8vw, 8rem); }
+.fact-band h2, .entity-links h2, .coverage-list h2 { font-size: clamp(2.35rem, 4.8vw, 4.4rem); }
+.fact-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.fact-list > div { min-width: 0; padding: 1.2rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.fact-list dt { color: var(--ink-soft); font-size: .67rem; font-weight: 800; text-transform: uppercase; }
+.fact-list dd { margin: .5rem 0 0; font-weight: 700; overflow-wrap: anywhere; }
+.fact-list a, .link-list a { text-decoration: underline; text-decoration-color: var(--sun); text-decoration-thickness: 2px; text-underline-offset: .2em; }
+
 .home-intro { display: grid; grid-template-columns: .55fr 1.45fr; gap: 4rem; border-top: 1px solid var(--line); }
 .home-intro h2, .section-heading h2, .split-feature h2, .service-overview h2, .suitable-section h2, .contact-details h2, .about-story h2, .coverage-feature h2 { font-size: clamp(2.4rem, 4.8vw, 4.5rem); }
 .home-intro p:last-child { max-width: 650px; margin: 1.5rem 0 0; color: var(--ink-soft); }
@@ -166,6 +175,8 @@ h1, h2 { margin: 0; font-family: var(--font-serif); font-weight: 520; letter-spa
 .related-guide > span { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
 .related-guide h3 { margin: 1.8rem 0 1rem; font-family: var(--font-serif); font-size: 2rem; font-weight: 550; line-height: 1.05; }
 .related-guide p { color: var(--ink-soft); font-size: .9rem; }
+.service-facts { padding-bottom: clamp(3rem, 6vw, 5rem); }
+.service-facts .fact-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
 .guide-index article { display: grid; grid-template-columns: .35fr 1.65fr; gap: 2rem; padding: 2.5rem 0; border-top: 1px solid var(--line); }
 .guide-index article:last-child { border-bottom: 1px solid var(--line); }
@@ -193,6 +204,16 @@ h1, h2 { margin: 0; font-family: var(--font-serif); font-weight: 520; letter-spa
 .coverage-art { aspect-ratio: 1.15; }
 .coverage-feature p, .about-story p { color: var(--ink-soft); }
 .coverage-feature .button { margin-top: 1.5rem; }
+.coverage-list { border-top: 1px solid var(--line); }
+.coverage-list .section-heading > p:last-child { color: var(--ink-soft); }
+.postcode-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.postcode-grid section { min-width: 0; padding: 1.5rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.postcode-grid h3 { margin: 0; font-family: var(--font-serif); font-size: 1.55rem; font-weight: 560; }
+.postcode-grid p { margin: 1rem 0 0; color: var(--ink-soft); font-size: .84rem; overflow-wrap: anywhere; }
+.entity-links { align-items: start; border-top: 1px solid var(--line); }
+.link-list { align-self: start; }
+.link-list p { margin: 0; padding: 1.1rem 0; border-top: 1px solid var(--line); color: var(--ink-soft); }
+.link-list p:last-child { border-bottom: 1px solid var(--line); }
 .about-story picture { aspect-ratio: 4 / 5; border-radius: var(--radius-lg); overflow: hidden; }
 .about-story picture img { width: 100%; height: 100%; object-fit: cover; }
 .about-story ol { margin: 2.2rem 0 0; padding: 0; list-style: none; }
@@ -243,6 +264,7 @@ h1, h2 { margin: 0; font-family: var(--font-serif); font-weight: 520; letter-spa
 .message-page p { max-width: 620px; margin: 1.5rem auto; color: var(--ink-soft); }
 
 .cookie-banner { position: fixed; z-index: 60; bottom: 1rem; left: 1rem; display: grid; gap: 1rem; width: min(34rem, calc(100% - 2rem)); padding: 1.2rem; border: 1px solid rgba(245,240,230,.22); border-radius: 1rem; color: var(--cream); background: #101c18; box-shadow: 0 24px 80px rgba(0,0,0,.3); }
+html[data-sunshine-consent="saved"] .cookie-banner { display: none; }
 .cookie-banner h2 { font-family: var(--font-sans); font-size: 1rem; font-weight: 800; letter-spacing: 0; }
 .cookie-banner p { margin: .25rem 0 0; color: rgba(245,240,230,.72); font-size: .75rem; }
 .cookie-actions { display: flex; gap: .7rem; }
@@ -271,7 +293,7 @@ h1, h2 { margin: 0; font-family: var(--font-serif); font-weight: 520; letter-spa
 @media (max-width: 800px) {
   .page-shell { width: min(100% - 2rem, 680px); }
   .section-space { padding-block: 5rem; }
-  .home-hero, .page-hero.with-image, .home-intro, .york-section, .split-feature, .service-overview, .suitable-section, .faq-section, .contact-band > div, .coverage-feature, .about-story, .contact-layout { grid-template-columns: 1fr; }
+  .home-hero, .page-hero.with-image, .home-intro, .york-section, .split-feature, .service-overview, .suitable-section, .faq-section, .contact-band > div, .coverage-feature, .about-story, .contact-layout, .fact-band > div, .entity-links { grid-template-columns: 1fr; }
   .home-hero { padding-block: 4rem; }
   .home-hero-media { width: min(100%, 560px); margin-inline: auto; }
   .home-hero-media picture { aspect-ratio: 4 / 3; border-radius: var(--radius-lg); }
@@ -288,6 +310,7 @@ h1, h2 { margin: 0; font-family: var(--font-serif); font-weight: 520; letter-spa
   .guide-layout aside, .contact-details { position: static; }
   .guide-index article { grid-template-columns: 80px 1fr; }
   .values-band > div { flex-wrap: wrap; }
+  .service-facts .fact-list, .postcode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 560px) {
@@ -306,6 +329,7 @@ h1, h2 { margin: 0; font-family: var(--font-serif); font-weight: 520; letter-spa
   .form-submit { align-items: flex-start; flex-direction: column; }
   .cookie-actions { align-items: stretch; flex-direction: column; }
   .guide-index article { grid-template-columns: 1fr; }
+  .fact-list, .service-facts .fact-list, .postcode-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
