@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { Resend } from "resend";
 import { serviceBySlug } from "@/content/services";
+import { buildEnquiryEmailMessages } from "@/lib/enquiry-email";
 
 export const runtime = "nodejs";
 
@@ -112,34 +113,16 @@ export async function POST(request: Request) {
   }
 
   const service = serviceBySlug.get(data.service);
-  const subject = `Website cleaning enquiry: ${service?.shortName ?? data.service}`;
-  const body = [
-    "New Sunshine Cleaning website enquiry",
-    "",
-    `Name: ${data.name}`,
-    `Email: ${data.email}`,
-    `Phone: ${data.phone}`,
-    `Postcode: ${data.postcode}`,
-    `Service: ${service?.shortName ?? data.service}`,
-    `Property type: ${data.propertyType}`,
-    `Frequency: ${data.frequency}`,
-    `Preferred date: ${data.preferredDate || "Not supplied"}`,
-    `Message: ${data.message}`,
-  ].join("\n");
+  const emailData = { ...data, service: service?.shortName ?? data.service };
+  const emails = buildEnquiryEmailMessages(emailData, fromEmail, toEmail);
   const submissionId = startedAt > 0 ? String(startedAt) : randomUUID();
   const idempotencyKey = `website-enquiry/${createHash("sha256").update(`${submissionId}|${data.email}|${data.message}`).digest("hex")}`;
+  const resend = new Resend(apiKey);
 
   try {
-    const resend = new Resend(apiKey);
     const { error } = await resend.emails.send(
-      {
-        from: `Sunshine Cleaning website <${fromEmail}>`,
-        to: [toEmail],
-        replyTo: data.email,
-        subject,
-        text: body,
-      },
-      { idempotencyKey },
+      emails.internal,
+      { idempotencyKey: `${idempotencyKey}/internal` },
     );
     if (error) {
       console.error("Resend enquiry delivery failed:", error.name);
@@ -148,6 +131,16 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Resend enquiry delivery failed:", error instanceof Error ? error.name : "unknown_error");
     return response(500, false, "We could not send your enquiry just now. Please call, WhatsApp or email us instead.");
+  }
+
+  try {
+    const { error } = await resend.emails.send(
+      emails.customer,
+      { idempotencyKey: `${idempotencyKey}/customer` },
+    );
+    if (error) console.error("Resend customer confirmation failed:", error.name);
+  } catch (error) {
+    console.error("Resend customer confirmation failed:", error instanceof Error ? error.name : "unknown_error");
   }
 
   return response(200, true, "Thank you. Your enquiry has been sent to Sunshine Cleaning.");

@@ -14,7 +14,7 @@ Live [sunshinecleaning.uk](sunshinecleaning.uk).
 
 ## Enquiry email with Resend
 
-The contact form posts to the Next.js Route Handler at `app/api/enquiry/route.ts`. It validates the submission and sends the enquiry through Resend.
+The contact form posts to the Next.js Route Handler at `app/api/enquiry/route.ts`. It validates the submission, sends a branded enquiry notification to Sunshine Cleaning through Resend, and then sends a separate branded confirmation to the customer.
 
 Copy `.env.example` to `.env.local` and configure:
 
@@ -32,7 +32,7 @@ Before production deployment:
 3. Make sure `RESEND_FROM_EMAIL` uses the verified domain or subdomain.
 4. Keep `SUNSHINE_FORM_TEST_MODE=0` in production.
 
-`SUNSHINE_FORM_TEST_MODE=1` bypasses external delivery and is only for automated tests.
+`SUNSHINE_FORM_TEST_MODE=1` bypasses both external email deliveries and is only for automated tests. The Sunshine notification is the success-critical message; if it is accepted but the customer confirmation fails, the enquiry still returns success and the confirmation failure is logged for follow-up.
 
 ## Build and deploy
 
